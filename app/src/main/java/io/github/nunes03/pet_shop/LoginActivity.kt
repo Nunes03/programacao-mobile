@@ -11,20 +11,20 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val entrarBotao: Button = findViewById(R.id.botaoEntrarLogin);
-        val criarContaBotao: Button = findViewById(R.id.botaoCriarContaLogin);
+        val loginButton: Button = findViewById(R.id.botaoEntrarLogin);
+        val createAccountButton: Button = findViewById(R.id.botaoCriarContaLogin);
 
-        entrarBotao.setOnClickListener { entrar() };
-        criarContaBotao.setOnClickListener { criarConta() };
+        loginButton.setOnClickListener { login() };
+        createAccountButton.setOnClickListener { createAccount() };
     }
 
-    private fun entrar() {
+    private fun login() {
         val homeActivity = Intent(this, HomeActivity::class.java);
         startActivity(homeActivity);
     }
 
-    private fun criarConta() {
-        val criarContaActivity = Intent(this, CriarContaActivity::class.java);
-        startActivity(criarContaActivity);
+    private fun createAccount() {
+        val createAccountActivity = Intent(this, CreateAccountActivity::class.java);
+        startActivity(createAccountActivity);
     }
 }
