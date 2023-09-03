@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <EditText
-            android:id="@+id/textConfirmarSenhaCriarConta"
+            android:id="@+id/textConfirmPasswordCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <EditText
-            android:id="@+id/textSenhaCriarConta"
+            android:id="@+id/textPasswordCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <Button
-            android:id="@+id/botaoCadastrarCriarConta"
+            android:id="@+id/buttonSaveCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -98,7 +98,7 @@
             android:text="Cadastrar" />
 
         <Button
-            android:id="@+id/botaoVoltarCriarConta"
+            android:id="@+id/buttonBackCreateAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -122,6 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="sans-serif"
+            android:textAlignment="center"
             android:textColor="#FF0000"
             android:textSize="14sp" />
     </LinearLayout>

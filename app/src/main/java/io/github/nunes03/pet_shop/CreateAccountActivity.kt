@@ -4,18 +4,20 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import io.github.nunes03.pet_shop.datas.entities.UserEntity
-import io.github.nunes03.pet_shop.datas.existByEmail
-import io.github.nunes03.pet_shop.datas.saveUser
+import io.github.nunes03.pet_shop.database.UserRepository
+import io.github.nunes03.pet_shop.entities.UserEntity
 
 class CreateAccountActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
+        setClickEvents()
+    }
 
-        val saveButton: Button = findViewById(R.id.botaoCadastrarCriarConta);
-        val backButton: Button = findViewById(R.id.botaoVoltarCriarConta);
+    private fun setClickEvents() {
+        val saveButton: Button = findViewById(R.id.buttonSaveCreateAccount);
+        val backButton: Button = findViewById(R.id.buttonBackCreateAccount);
 
         saveButton.setOnClickListener { save() };
         backButton.setOnClickListener { backToLogin() };
@@ -24,9 +26,7 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun save() {
         if (isValid()) {
             val newUser = buildUser()
-            saveUser(newUser)
-
-            getTextValidate().text = ""
+            UserRepository.saveUser(newUser)
         }
     }
 
@@ -40,14 +40,28 @@ class CreateAccountActivity : AppCompatActivity() {
 
     private fun isEmailValid(): Boolean {
         val email = getTextEmail().text.toString()
-        return existByEmail(email)
+
+        if (UserRepository.existByEmail(email)) {
+            getTextValidate().text = "E-mail já cadastrado"
+
+            return false;
+        }
+
+        getTextValidate().text = ""
+        return true;
     }
 
     private fun isPasswordValid(): Boolean {
         val password: String = getTextPassword().text.toString()
         val confirmPassword: String = getTextConfirmPassword().text.toString()
 
-        return password == confirmPassword;
+        if (password != confirmPassword) {
+            getTextValidate().text = "As senhas devem ser iguais"
+
+            return false;
+        }
+
+        return true;
     }
 
     private fun buildUser(): UserEntity {
@@ -57,11 +71,11 @@ class CreateAccountActivity : AppCompatActivity() {
         return UserEntity(email, password);
     }
 
-    private fun getTextEmail(): TextView = findViewById(R.id.textEmailLogin)
+    private fun getTextEmail(): TextView = findViewById(R.id.textEmailCreateAccount)
 
-    private fun getTextPassword(): TextView = findViewById(R.id.textSenhaCriarConta)
+    private fun getTextPassword(): TextView = findViewById(R.id.textPasswordCreateAccount)
 
-    private fun getTextConfirmPassword(): TextView = findViewById(R.id.textConfirmarSenhaCriarConta)
+    private fun getTextConfirmPassword(): TextView = findViewById(R.id.textConfirmPasswordCreateAccount)
 
     private fun getTextValidate(): TextView = findViewById(R.id.textValidateCreateAccount)
 }
